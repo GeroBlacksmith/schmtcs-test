@@ -1,0 +1,10 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-<%= classify(name) %>',
+  templateUrl: './<%= classify(name) %>.component.html',
+  styleUrls: ['./<%= classify(name) %>.component.css']
+})
+export class <%= classify(name) %>Component {
+  title = '<%= classify(name) %> anda!';
+}
