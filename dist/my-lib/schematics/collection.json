@@ -14,6 +14,11 @@
         "description": "Generate a component with a html section",
         "factory": "./my-section/index#mySection",
         "schema":"./my-section/schema.json"
+    },
+    "carousel":{
+      "description": "Generate a carousel module",
+      "factory": "./carousel/index#carousel",
+      "schema": "./carousel/schema.json"
     }
   }
 }

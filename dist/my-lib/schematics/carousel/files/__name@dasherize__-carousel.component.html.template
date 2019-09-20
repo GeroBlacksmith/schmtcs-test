@@ -1,0 +1,25 @@
+<div class="container">
+    
+    <div class="carousel-main" [style.left]=" '-' + carouselSlide + 'px' ">
+        <div [className]="bg.className+' background'" *ngFor="let bg of backgrounds;let i = index" [style.backgroundImage]="bg.bg" [style.left]="i*innerWidth+'px'">
+            <div class="card">
+                <div class="text">
+                    <span>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. A doloremque obcaecati omnis cupiditate, possimus sequi quo vero reprehenderit sunt nemo laborum placeat nostrum nam voluptatum nihil ab blanditiis odio nesciunt ducimus culpa repellat? Quidem deserunt vero unde vel magnam, delectus laborum ipsa voluptatum animi voluptate aliquam, perspiciatis sapiente velit consequuntur, sunt enim?
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="title">
+        <h1>
+             <%= classify(name) %>
+        </h1>
+    </div>
+    <div class="bullets">
+        <div *ngFor="let bg of backgrounds;let i = index" [className]="bg.className" (click)="changeSlide(i)">
+            <img [src]="slide === i ? 'assets/images' : 'assets/images' " alt="">
+        </div>
+    </div>
+</div>
+<app-join-us></app-join-us>

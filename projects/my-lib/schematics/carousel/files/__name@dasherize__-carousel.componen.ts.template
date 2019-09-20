@@ -1,0 +1,51 @@
+import { Component, OnInit, HostListener } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { interval } from 'rxjs';
+@Component({
+  selector: 'app-<%= classify(name) %>-carousel',
+  templateUrl: './<%= classify(name) %>-carousel.component.html',
+  styleUrls: ['./<%= classify(name) %>-carousel.component.scss']
+})
+export class <%= classify(name) %>CarouselComponent implements OnInit {
+  
+  backgrounds: any;
+  innerWidth: number;
+  carouselSlide = 0;
+  slidesNumber = 4;
+  slide = 0;
+  
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.innerWidth = window.innerWidth;
+
+    this.http.get('assets/mock-data/carousel.json')
+      .pipe(
+        tap(
+          ( data: Array<any> ) => data.map(
+            value => value.bg=`url(/assets/agro/${value.bg})`
+          ))
+      )
+      .subscribe((res) => {
+        this.backgrounds = res;
+    });
+    this.carouselSlide = this.innerWidth * this.slide;
+    interval(5000).subscribe(
+      res => {
+        this.slide = this.slide + 1 < this.slidesNumber? this.slide + 1: 0;
+        this.carouselSlide = this.innerWidth * this.slide;
+      }
+    );
+  }
+  // DOC: Explicar lo de HostListener
+  @HostListener('window:resize', ['$event'])
+  onresize(event){
+    this.innerWidth = event.target.innerWidth;
+    this.carouselSlide = this.innerWidth * this.slide;
+  }
+  changeSlide(index){
+    this.slide = index;
+    this.carouselSlide = this.innerWidth * this.slide;
+  }
+}
